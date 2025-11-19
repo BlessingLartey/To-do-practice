@@ -1,12 +1,16 @@
 import { useState } from "react";
 import TodoItem from "./TodoItem.jsx";
 import "./App.css";
-import useTodo from "./useTodo.js";
+// import useTodo from "./useTodo.js";
+import { useDispatch, useSelector } from "react-redux";
+import { addTask, deleteTask, toggleDone } from "./todoSlice.js";
 
 
 function App() {
   const [input, setInput] = useState("");
   const [title, setTitle] = useState("");
+  const tasks = useSelector((state) => state.todos);
+  const dispatch = useDispatch();
   // const [tasks, setTasks] = useState([]);
   // Edit
   // const [editingTaskId, setEditingTaskId] = useState(null);
@@ -73,14 +77,30 @@ function App() {
   //   setTasks(updatedTasks);
   // };
 
-  const { tasks, addTask, deleteTask, toggleDone } = useTodo();
+  // const { tasks, addTask, deleteTask, toggleDone } = useTodo();
 
-  const handleAdd = () => {
-    if (input.trim() === "") return;
-    addTask({ id: Date.now(), title: title, body: input, done: false });
-    setInput("");
-    setTitle("");
-  };
+  // const handleAdd = () => {
+  //   if (input.trim() === "") return;
+  //   addTask({ id: Date.now(), title: title, body: input, done: false });
+  //   setInput("");
+  //   setTitle("");
+  // };
+
+    const handleAdd = () =>{
+      if (!input.trim()) return;
+
+      dispatch(
+        addTask({
+          id: Date.now(),
+          title,
+          body:input,
+          done: false,
+        })
+      );
+
+      setInput("");
+      setTitle("");
+    }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-100 to-gray-200 flex flex-col items-center py-10 px-4">

@@ -1,6 +1,6 @@
 import React from "react";
 
-function TodoItem({ task, deleteTask, toggleDone, editProps }) {
+function TodoItem({ task, deleteTask, toggleDone }) {
   return (
     <li className="bg-white shadow-md rounded-xl p-4 my-3 flex flex-col gap-3 transition hover:shadow-lg">
       {/* Task Title */}
